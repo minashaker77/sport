@@ -3,6 +3,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:skeletons/skeletons.dart';
+import 'package:sport/month_tab.dart';
+import 'package:sport/week_tab.dart';
+
+import 'day_tab.dart';
 
 class MainPageController extends GetxController
     with GetSingleTickerProviderStateMixin {
@@ -22,36 +26,6 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     MainPageController mainPageController = Get.put(MainPageController());
-    List<int> listColor = [
-      0xffff6968,
-      0xff7a52ff,
-      0xffff8f61,
-      0xff2ac3ff,
-      0xff5a65ff,
-      0xff96da45,
-    ];
-    List<String> listName = [
-      "Hart Rate",
-      "Sleep",
-      "Energy Born",
-      "Steps",
-      "Running",
-      "Cycling"
-    ];
-    List<IconData> listIcon = [
-      CupertinoIcons.heart_fill,
-      CupertinoIcons.moon_zzz_fill,
-      Icons.local_fire_department,
-      Icons.support_agent,
-      CupertinoIcons.car,
-      Icons.accessible_sharp
-    ];
-    List<String> listImage = [
-      "https://images.pexels.com/photos/674010/pexels-photo-674010.jpeg?cs=srgb&dl=pexels-anjana-c-674010.jpg&fm=jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/640px-Image_created_with_a_mobile_phone.png",
-      "https://www.gettyimages.pt/gi-resources/images/Homepage/Hero/PT/PT_hero_42_153645159.jpg",
-      "https://images.pexels.com/photos/255379/pexels-photo-255379.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-    ];
     Color? color = const Color(0xff4b4b87);
     return SafeArea(
         child: Scaffold(
@@ -131,98 +105,9 @@ class HomeScreen extends StatelessWidget {
                 child: TabBarView(
               controller: mainPageController.tabController,
               children: [
-                Column(
-                  children: [
-                    Expanded(
-                      child: GridView.builder(
-                        gridDelegate:
-                            const SliverGridDelegateWithMaxCrossAxisExtent(
-                                maxCrossAxisExtent: 300,
-                                childAspectRatio: 1 / 1,
-                                crossAxisSpacing: 10,
-                                mainAxisSpacing: 10),
-                        itemCount: 6,
-                        itemBuilder: (BuildContext ctx, index) {
-                          return Container(
-                            decoration: BoxDecoration(
-                                color: Color(listColor[index]),
-                                borderRadius: BorderRadius.circular(20)),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Row(
-                                  children: [
-                                    const SizedBox(width: 10),
-                                    Expanded(
-                                        child: Padding(
-                                      padding: const EdgeInsets.all(8),
-                                      child: Text(
-                                        listName[index],
-                                        style: const TextStyle(
-                                            color: Colors.white, fontSize: 25),
-                                      ),
-                                    )),
-                                    Container(
-                                      width: 50,
-                                      height: 50,
-                                      margin: const EdgeInsets.all(5),
-                                      decoration: BoxDecoration(
-                                          color: Colors.grey.withOpacity(0.4),
-                                          borderRadius:
-                                              BorderRadius.circular(50)),
-                                      child: Icon(
-                                        listIcon[index],
-                                        color: Colors.white,
-                                        size: 30,
-                                      ),
-                                    )
-                                  ],
-                                ),
-                                const Spacer(),
-                                const Padding(
-                                  padding: EdgeInsets.all(10),
-                                  child: Text(
-                                    "0",
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 20),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          );
-                        },
-                      ),
-                    ),
-                  ],
-                ),
-                SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      ListView.builder(
-                          itemCount: 4,
-                          scrollDirection: Axis.vertical,
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemBuilder: (BuildContext context, index) {
-                            return Container(
-                              margin: const EdgeInsets.symmetric(
-                                  vertical: 10, horizontal: 15),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  image: DecorationImage(
-                                      image: NetworkImage(listImage[index]),
-                                      fit: BoxFit.cover)),
-                              height: 200,
-                              width: double.infinity,
-                            );
-                          })
-                    ],
-                  ),
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [Center(child: Text("Month"))],
-                ),
+                const DayTabScreen(),
+                const WeekTabScreen(),
+                const MonthTabScreen(),
               ],
             ))
           ],
