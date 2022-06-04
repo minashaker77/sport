@@ -104,10 +104,10 @@ class HomeScreen extends StatelessWidget {
             Expanded(
                 child: TabBarView(
               controller: mainPageController.tabController,
-              children: [
-                const DayTabScreen(),
-                const WeekTabScreen(),
-                const MonthTabScreen(),
+              children: const [
+                DayTabScreen(),
+                WeekTabScreen(),
+                MonthTabScreen(),
               ],
             ))
           ],

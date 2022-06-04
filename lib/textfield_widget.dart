@@ -24,7 +24,7 @@ class TextFieldWidget extends StatelessWidget {
           textAlign: TextAlign.right,
           maxLines: null,
           keyboardType: textInputType,
-          expands: expandable ?? false,
+          expands: expandable,
           decoration: InputDecoration(
               contentPadding:
                   const EdgeInsets.symmetric(vertical: 8, horizontal: 8),

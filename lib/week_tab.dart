@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class WeekTabScreen extends StatelessWidget {
   const WeekTabScreen({Key? key}) : super(key: key);
@@ -20,16 +21,29 @@ class WeekTabScreen extends StatelessWidget {
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (BuildContext context, index) {
-              return Container(
-                margin:
-                    const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                decoration: BoxDecoration(
+              return CachedNetworkImage(
+                imageUrl: listImage[index],
+                imageBuilder: (context, imageProvider) => Container(
+                  margin:
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                  decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
                     image: DecorationImage(
-                        image: NetworkImage(listImage[index]),
-                        fit: BoxFit.cover)),
-                height: 200,
-                width: double.infinity,
+                      image: imageProvider,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  height: 200,
+                  width: double.infinity,
+                ),
+                placeholder: (context, url) => Center(
+                  child: Text("waiting..."),
+                ),
+                errorWidget: (context, url, error) => Icon(
+                  Icons.error,
+                  color: Colors.red,
+                  size: 40,
+                ),
               );
             })
       ],
